@@ -30,10 +30,12 @@ public class CountryConversionServImp implements CountryConversionService {
         RateConversionResponse response = new RateConversionResponse();
         response.setAmount(String.valueOf(converSionRequest.getAmount()));
         response.setConvertedAmount(String.valueOf(convertedAmount));
-        response.setDate(currencyRateDetails.getDate());
+        response.setLastUpdated(currencyRateDetails.getDate());
         response.setDestCurr(currencyRateDetails.getCode());
         response.setRate(currencyRateDetails.getRate());
+        response.setInverseRate(currencyRateDetails.getInverseRate());
         response.setSourceCurr(converSionRequest.getSourceCurr());
+        response.setSource("http://www.floatrates.com/");
         return response;
     }
 
