@@ -7,9 +7,27 @@ public class RateConversionResponse {
     private String sourceCurr;
     private String destCurr;
     private String rate;
-    private String date;
+    private String inverseRate;
+    private String lastUpdated;
     private String amount;
     private String convertedAmount;
+    private String source;
+
+    public String getInverseRate() {
+        return inverseRate;
+    }
+
+    public void setInverseRate(String inverseRate) {
+        this.inverseRate = inverseRate;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 
     public String getSourceCurr() {
         return sourceCurr;
@@ -35,12 +53,12 @@ public class RateConversionResponse {
         this.rate = rate;
     }
 
-    public String getDate() {
-        return date;
+    public String getLastUpdated() {
+        return lastUpdated;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public String getAmount() {
