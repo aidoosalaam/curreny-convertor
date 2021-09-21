@@ -27,9 +27,8 @@ public class CountryConversion {
         return new ResponseEntity<>(conversionResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/test/{curr}")
+    @GetMapping("/{curr}")
     public String testingConvertor(@PathVariable String curr){
-
         try {
             JSONObject json = new JSONObject(IOUtils.toString(new URL("http://www.floatrates.com/daily/"+curr+".json"), Charset.forName("UTF-8")));
             return json.toString();
