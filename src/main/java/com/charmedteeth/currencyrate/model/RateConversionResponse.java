@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class RateConversionResponse {
-    private String sourceCurr;
-    private String destCurr;
+    private String baseCurr;
+    private String qouteCurr;
     private String rate;
     private String inverseRate;
     private String lastUpdated;
@@ -29,20 +29,20 @@ public class RateConversionResponse {
         this.source = source;
     }
 
-    public String getSourceCurr() {
-        return sourceCurr;
+    public String getBaseCurr() {
+        return baseCurr;
     }
 
-    public void setSourceCurr(String sourceCurr) {
-        this.sourceCurr = sourceCurr;
+    public void setBaseCurr(String baseCurr) {
+        this.baseCurr = baseCurr;
     }
 
-    public String getDestCurr() {
-        return destCurr;
+    public String getQouteCurr() {
+        return qouteCurr;
     }
 
-    public void setDestCurr(String destCurr) {
-        this.destCurr = destCurr;
+    public void setQouteCurr(String qouteCurr) {
+        this.qouteCurr = qouteCurr;
     }
 
     public String getRate() {

@@ -6,6 +6,8 @@ import com.charmedteeth.currencyrate.model.RateConvertRequest;
 import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -18,23 +20,27 @@ import java.nio.charset.Charset;
 
 @Service
 public class CountryConversionServImp implements CountryConversionService {
+    private static final Logger logger = LoggerFactory.getLogger(CountryConversionServImp.class);
+
     @Override
     public RateConversionResponse convertToCountryRate(RateConvertRequest converSionRequest) throws IOException {
-        JSONObject json = new JSONObject(IOUtils.toString(new URL("http://www.floatrates.com/daily/"+converSionRequest.getSourceCurr().toLowerCase()+".json"), Charset.forName("UTF-8")));
-        JSONObject destCurrJson = json.getJSONObject(converSionRequest.getDestCurr().toLowerCase());
-        System.out.println("Destination Currency Details : "+ destCurrJson.toString());
+        logger.info("Request Details : {} ", converSionRequest);
+
+        JSONObject json = new JSONObject(IOUtils.toString(new URL("http://www.floatrates.com/daily/"+converSionRequest.getBaseCurr().toLowerCase()+".json"), Charset.forName("UTF-8")));
+        JSONObject destCurrJson = json.getJSONObject(converSionRequest.getQouteCurr().toLowerCase());
+        logger.info("Quote Currency Details : {} ",destCurrJson.toString());
         Gson gson = new Gson();
         CurrencyRateDetails currencyRateDetails = gson.fromJson(destCurrJson.toString(),CurrencyRateDetails.class);
         double convertedAmount = converSionRequest.getAmount() * Double.parseDouble(currencyRateDetails.getRate());
-        System.out.println("Converted Amount : "+ convertedAmount);
+        logger.info("Converted Amount : {} ", convertedAmount);
         RateConversionResponse response = new RateConversionResponse();
         response.setAmount(String.valueOf(converSionRequest.getAmount()));
         response.setConvertedAmount(String.valueOf(convertedAmount));
         response.setLastUpdated(currencyRateDetails.getDate());
-        response.setDestCurr(currencyRateDetails.getCode());
+        response.setQouteCurr(currencyRateDetails.getCode());
         response.setRate(currencyRateDetails.getRate());
         response.setInverseRate(currencyRateDetails.getInverseRate());
-        response.setSourceCurr(converSionRequest.getSourceCurr());
+        response.setBaseCurr(converSionRequest.getBaseCurr());
         response.setSource("http://www.floatrates.com/");
         return response;
     }
