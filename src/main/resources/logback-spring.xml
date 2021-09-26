@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOGS" value="/home/mercqyft/logs/" />
+    <property name="LOGS" value="/root/projects/logs/" />
 <!--<property name="LOGS" value="/Users/amtuumuch/Documents/Personal/studies/Spring/logs/" />-->
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
