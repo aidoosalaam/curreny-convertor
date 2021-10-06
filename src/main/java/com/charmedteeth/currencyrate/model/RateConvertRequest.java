@@ -6,7 +6,7 @@ import lombok.Data;
 public class RateConvertRequest {
     private String baseCurr;
     private String qouteCurr;
-    private double amount;
+    private long amount;
 
     public String getBaseCurr() {
         return baseCurr;
@@ -28,13 +28,10 @@ public class RateConvertRequest {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 
     public RateConvertRequest() {
     }
-
-
-
 }

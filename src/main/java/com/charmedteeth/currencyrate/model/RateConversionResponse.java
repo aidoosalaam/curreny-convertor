@@ -6,7 +6,7 @@ import lombok.Data;
 public class RateConversionResponse {
     private String baseCurr;
     private String qouteCurr;
-    private String rate;
+    private double rate;
     private String inverseRate;
     private String lastUpdated;
     private String amount;
@@ -29,11 +29,11 @@ public class RateConversionResponse {
         this.qouteCurr = qouteCurr;
     }
 
-    public String getRate() {
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(double rate) {
         this.rate = rate;
     }
 

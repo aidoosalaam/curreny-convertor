@@ -30,7 +30,7 @@ public class CountryConversionServImp implements CountryConversionService {
         logger.info("Quote Currency Details : {} ",destCurrJson.toString());
         Gson gson = new Gson();
         CurrencyRateDetails currencyRateDetails = gson.fromJson(destCurrJson.toString(),CurrencyRateDetails.class);
-        double convertedAmount = converSionRequest.getAmount() * Double.parseDouble(currencyRateDetails.getRate());
+        long convertedAmount = (long) (converSionRequest.getAmount() * currencyRateDetails.getRate());
         logger.info("Converted Amount : {} ", convertedAmount);
         RateConversionResponse response = new RateConversionResponse();
         response.setAmount(String.valueOf(converSionRequest.getAmount()));

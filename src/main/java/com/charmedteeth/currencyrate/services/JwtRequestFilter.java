@@ -43,11 +43,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 logger.info("JWT Token has expired");
             }
         }else {
-            logger.info("Token must start with Bearer ");
+            logger.info("Invalid Token");
         }
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
             if(jwtTokenUtil.validaToken(jwToken,userDetails)){
                 logger.info("Token : " + jwToken);
