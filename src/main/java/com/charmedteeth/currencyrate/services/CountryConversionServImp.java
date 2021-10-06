@@ -6,8 +6,9 @@ import com.charmedteeth.currencyrate.model.RateConvertRequest;
 import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -19,16 +20,18 @@ import java.nio.charset.Charset;
 
 @Service
 public class CountryConversionServImp implements CountryConversionService {
+    private static final Logger logger = LoggerFactory.getLogger(CountryConversionServImp.class);
+
     @Override
     public RateConversionResponse convertToCountryRate(RateConvertRequest converSionRequest) throws IOException {
 
         JSONObject json = new JSONObject(IOUtils.toString(new URL("http://www.floatrates.com/daily/"+converSionRequest.getBaseCurr().toLowerCase()+".json"), Charset.forName("UTF-8")));
         JSONObject destCurrJson = json.getJSONObject(converSionRequest.getQouteCurr().toLowerCase());
-      //  logger.info("Quote Currency Details : {} ",destCurrJson.toString());
+        logger.info("Quote Currency Details : {} ",destCurrJson.toString());
         Gson gson = new Gson();
         CurrencyRateDetails currencyRateDetails = gson.fromJson(destCurrJson.toString(),CurrencyRateDetails.class);
         double convertedAmount = converSionRequest.getAmount() * Double.parseDouble(currencyRateDetails.getRate());
-      //  logger.info("Converted Amount : {} ", convertedAmount);
+        logger.info("Converted Amount : {} ", convertedAmount);
         RateConversionResponse response = new RateConversionResponse();
         response.setAmount(String.valueOf(converSionRequest.getAmount()));
         response.setConvertedAmount(String.valueOf(convertedAmount));

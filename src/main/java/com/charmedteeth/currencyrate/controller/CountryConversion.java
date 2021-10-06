@@ -5,6 +5,8 @@ import com.charmedteeth.currencyrate.model.RateConvertRequest;
 import com.charmedteeth.currencyrate.services.CountryConversionService;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ import java.nio.charset.Charset;
 @RequestMapping("/api/convert/currency")
 public class CountryConversion {
 
+    private static final Logger logger = LoggerFactory.getLogger(CountryConversion.class);
+
     @Autowired
     CountryConversionService conversionService;
 
@@ -27,15 +31,14 @@ public class CountryConversion {
         return new ResponseEntity<>(conversionResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/test/{curr}")
+    @GetMapping("/{curr}")
     public String testingConvertor(@PathVariable String curr){
-
         try {
             JSONObject json = new JSONObject(IOUtils.toString(new URL("http://www.floatrates.com/daily/"+curr+".json"), Charset.forName("UTF-8")));
             return json.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Hello Sala Convertor";
+        return "Hello Convertor";
     }
 }

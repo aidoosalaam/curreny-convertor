@@ -4,6 +4,8 @@ import com.charmedteeth.currencyrate.model.JwtRequest;
 import com.charmedteeth.currencyrate.model.JwtResponse;
 import com.charmedteeth.currencyrate.services.JwtTokenUtil;
 import com.charmedteeth.currencyrate.services.JwtUserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RequestMapping("/api/convert/currency")
 public class JwtAuthenticationController {
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationController.class);
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -36,8 +39,6 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
     private void  authenticate(String username , String password) throws Exception {
-        System.out.println("Trying to authenticate ");
-
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         }catch (DisabledException e){

@@ -1,6 +1,8 @@
 package com.charmedteeth.currencyrate.services;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +19,7 @@ import java.io.IOException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
+    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
@@ -35,20 +38,20 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwToken);
             }catch (IllegalArgumentException e){
-                System.out.println("JWT Token could not be retrieved");
+                logger.info("JWT Token could not be retrieved");
             }catch (ExpiredJwtException e){
-                System.out.println("JWT Token has expired");
+                logger.info("JWT Token has expired");
             }
         }else {
-            System.out.println("Token must start with Bearer ");
+            logger.info("Token must start with Bearer ");
         }
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
 
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
             if(jwtTokenUtil.validaToken(jwToken,userDetails)){
-                System.out.println("Token : " + jwToken);
-                System.out.println("Username : " + username);
+                logger.info("Token : " + jwToken);
+                logger.info("Username : " + username);
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails,
                         null,userDetails.getAuthorities());
