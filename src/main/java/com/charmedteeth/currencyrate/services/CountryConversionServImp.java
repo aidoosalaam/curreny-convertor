@@ -24,6 +24,7 @@ public class CountryConversionServImp implements CountryConversionService {
 
     @Override
     public RateConversionResponse convertToCountryRate(RateConvertRequest converSionRequest) throws IOException {
+
         logger.info("Request Details : {} ", converSionRequest);
 
         JSONObject json = new JSONObject(IOUtils.toString(new URL("http://www.floatrates.com/daily/"+converSionRequest.getBaseCurr().toLowerCase()+".json"), Charset.forName("UTF-8")));
@@ -31,7 +32,7 @@ public class CountryConversionServImp implements CountryConversionService {
         logger.info("Quote Currency Details : {} ",destCurrJson.toString());
         Gson gson = new Gson();
         CurrencyRateDetails currencyRateDetails = gson.fromJson(destCurrJson.toString(),CurrencyRateDetails.class);
-        double convertedAmount = converSionRequest.getAmount() * Double.parseDouble(currencyRateDetails.getRate());
+        long convertedAmount = (long) (converSionRequest.getAmount() * currencyRateDetails.getRate());
         logger.info("Converted Amount : {} ", convertedAmount);
         RateConversionResponse response = new RateConversionResponse();
         response.setAmount(String.valueOf(converSionRequest.getAmount()));

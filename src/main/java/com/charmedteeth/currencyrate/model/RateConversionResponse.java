@@ -6,28 +6,12 @@ import lombok.Data;
 public class RateConversionResponse {
     private String baseCurr;
     private String qouteCurr;
-    private String rate;
+    private double rate;
     private String inverseRate;
     private String lastUpdated;
     private String amount;
     private String convertedAmount;
     private String source;
-
-    public String getInverseRate() {
-        return inverseRate;
-    }
-
-    public void setInverseRate(String inverseRate) {
-        this.inverseRate = inverseRate;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
 
     public String getBaseCurr() {
         return baseCurr;
@@ -45,12 +29,20 @@ public class RateConversionResponse {
         this.qouteCurr = qouteCurr;
     }
 
-    public String getRate() {
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public String getInverseRate() {
+        return inverseRate;
+    }
+
+    public void setInverseRate(String inverseRate) {
+        this.inverseRate = inverseRate;
     }
 
     public String getLastUpdated() {
@@ -75,6 +67,14 @@ public class RateConversionResponse {
 
     public void setConvertedAmount(String convertedAmount) {
         this.convertedAmount = convertedAmount;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public RateConversionResponse() {
