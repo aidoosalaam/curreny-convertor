@@ -2,6 +2,7 @@ package com.charmedteeth.currencyrate.controller;
 
 import com.charmedteeth.currencyrate.model.RateConversionResponse;
 import com.charmedteeth.currencyrate.model.RateConvertRequest;
+import com.charmedteeth.currencyrate.services.CountryConversionServImp;
 import com.charmedteeth.currencyrate.services.CountryConversionService;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
@@ -34,7 +35,9 @@ public class CountryConversion {
     @GetMapping("/{curr}")
     public String testingConvertor(@PathVariable String curr){
         try {
-            JSONObject json = new JSONObject(IOUtils.toString(new URL("http://www.floatrates.com/daily/"+curr+".json"), Charset.forName("UTF-8")));
+            String rateUrl = "http://www.floatrates.com/daily/"+curr+".json";
+            logger.info("URL for base curr {} ",rateUrl);
+            JSONObject json = new JSONObject(IOUtils.toString(new URL(rateUrl), Charset.forName("UTF-8")));
             return json.toString();
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@ public class RateConvertRequest {
     private String baseCurr;
     private String qouteCurr;
     private long amount;
-
+  
     public String getBaseCurr() {
         return baseCurr;
     }
