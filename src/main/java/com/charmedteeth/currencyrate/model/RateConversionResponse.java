@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class RateConversionResponse {
-    private String sourceCurr;
-    private String destCurr;
+    private String baseCurr;
+    private String qouteCurr;
     private String rate;
     private String inverseRate;
     private String lastUpdated;
@@ -13,36 +13,20 @@ public class RateConversionResponse {
     private String convertedAmount;
     private String source;
 
-    public String getInverseRate() {
-        return inverseRate;
+    public String getBaseCurr() {
+        return baseCurr;
     }
 
-    public void setInverseRate(String inverseRate) {
-        this.inverseRate = inverseRate;
+    public void setBaseCurr(String baseCurr) {
+        this.baseCurr = baseCurr;
     }
 
-    public String getSource() {
-        return source;
+    public String getQouteCurr() {
+        return qouteCurr;
     }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getSourceCurr() {
-        return sourceCurr;
-    }
-
-    public void setSourceCurr(String sourceCurr) {
-        this.sourceCurr = sourceCurr;
-    }
-
-    public String getDestCurr() {
-        return destCurr;
-    }
-
-    public void setDestCurr(String destCurr) {
-        this.destCurr = destCurr;
+    public void setQouteCurr(String qouteCurr) {
+        this.qouteCurr = qouteCurr;
     }
 
     public String getRate() {
@@ -51,6 +35,14 @@ public class RateConversionResponse {
 
     public void setRate(String rate) {
         this.rate = rate;
+    }
+
+    public String getInverseRate() {
+        return inverseRate;
+    }
+
+    public void setInverseRate(String inverseRate) {
+        this.inverseRate = inverseRate;
     }
 
     public String getLastUpdated() {
@@ -75,6 +67,14 @@ public class RateConversionResponse {
 
     public void setConvertedAmount(String convertedAmount) {
         this.convertedAmount = convertedAmount;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public RateConversionResponse() {
