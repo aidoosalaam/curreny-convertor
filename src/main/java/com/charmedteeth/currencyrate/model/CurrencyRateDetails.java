@@ -8,11 +8,19 @@ public class CurrencyRateDetails {
     private String alphaCode;
     private String numericCode;
     private String name;
-    private String rate;
+    private double rate;
     private String date;
     private String inverseRate;
 
     public CurrencyRateDetails() {
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 
     public String getCode() {
@@ -45,14 +53,6 @@ public class CurrencyRateDetails {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getRate() {
-        return rate;
-    }
-
-    public void setRate(String rate) {
-        this.rate = rate;
     }
 
     public String getDate() {

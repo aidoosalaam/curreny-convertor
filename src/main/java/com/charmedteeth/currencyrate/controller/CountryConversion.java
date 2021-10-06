@@ -42,6 +42,6 @@ public class CountryConversion {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Hello Sala Convertor";
+        return "Hello Convertor";
     }
 }
