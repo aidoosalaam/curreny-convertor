@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOGS" value="/home/aidooamatu/apps/logs" />
+    <property name="LOGS" value="/home/aidooamatu/apps/logs/" />
 <!--<property name="LOGS" value="/Users/amtuumuch/Documents/logs" />-->
 
     <appender name="Console"
