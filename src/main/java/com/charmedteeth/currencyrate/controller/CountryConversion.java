@@ -18,7 +18,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 @RestController
-@RequestMapping("/api/convert/currency")
+@RequestMapping("floatrates/api/convert/currency")
 public class CountryConversion {
 
     private static final Logger logger = LoggerFactory.getLogger(CountryConversion.class);
